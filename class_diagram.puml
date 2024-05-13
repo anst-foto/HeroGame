@@ -1,0 +1,73 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+interface IWarrior {
+    + {abstract} GetPower() : int
+}
+
+interface IMage {
+    + {abstract} GetWisdom() : int
+}
+
+AHero <-- AHero
+abstract class AHero {
+    - name : string
+    # health : int
+    # damage : int
+
+    # Hero(name : string)
+
+    + GetName() : string
+    + GetHealth() : int
+    + GetDamage() : int
+
+    + SetHealth(health : int) : void
+
+    + Attack(hero : AHero) : void
+    + IsDead() : bool
+}
+
+AHero <|-- Warrior
+IWarrior <|.. Warrior
+class Warrior {
+    - power : int
+
+    + Warrior(name : string)
+
+    + GetPower() : int
+}
+
+AHero <|-- Mage
+IMage <|.. Mage
+class Mage {
+    + wisdom : int
+
+    + Mage(name : string)
+
+    + GetWisdom() : int
+}
+
+enum HeroTypes {
+    HERO_TYPE_WARRIOR
+    HERO_TYPE_MAGE
+}
+
+AHero <-- HeroFactory
+abstract class HeroFactory {
+    + {abstract} Create(name : string) : AHero
+
+    # HeroFactory()
+}
+
+HeroFactory <|-- WarriorFactory
+Warrior <.. WarriorFactory
+class WarriorFactory {
+    + Create(name : string) : AHero
+}
+
+HeroFactory <|-- MageFactory
+Mage <.. MageFactory
+class MageFactory {
+    + Create(name : string) : AHero
+}
+@enduml
