@@ -1,0 +1,10 @@
+#ifndef HEROGAME_HEROTYPES_H
+#define HEROGAME_HEROTYPES_H
+
+enum HeroType {
+    HERO_TYPE_NONE = 0,
+    HERO_TYPE_WARRIOR,
+    HERO_TYPE_MAGE
+};
+
+#endif //HEROGAME_HEROTYPES_H
